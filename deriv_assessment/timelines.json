@@ -1,0 +1,163 @@
+{
+    "incident_a": {
+        "incident_id": "INC-20240315-001",
+        "first_symptom": "2024-03-15 14:08:44 UTC",
+        "impact_moment": "2024-03-15 14:11:10 UTC",
+        "resolution_trigger": "2024-03-15 14:22:08 UTC",
+        "timeline": [
+            {
+                "timestamp": "2024-03-15 14:02:11 UTC",
+                "event": "API Gateway request latency reported at baseline (p99=120ms).",
+                "causal_significance": "normal_operation"
+            },
+            {
+                "timestamp": "2024-03-15 14:08:44 UTC",
+                "event": "API Gateway request latency p99 increased to 340ms.",
+                "causal_significance": "first_symptom"
+            },
+            {
+                "timestamp": "2024-03-15 14:09:01 UTC",
+                "event": "Pricing service detected a slow query (q_4821) taking 2100ms.",
+                "causal_significance": "contributing_factor_database_contention"
+            },
+            {
+                "timestamp": "2024-03-15 14:09:15 UTC",
+                "event": "Pricing service detected another slow query (q_4822) taking 3400ms.",
+                "causal_significance": "contributing_factor_database_contention"
+            },
+            {
+                "timestamp": "2024-03-15 14:10:33 UTC",
+                "event": "Primary database connection pool exhausted, with 47 requests waiting.",
+                "causal_significance": "critical_component_failure"
+            },
+            {
+                "timestamp": "2024-03-15 14:10:45 UTC",
+                "event": "API Gateway experienced an upstream timeout trying to reach the pricing service.",
+                "causal_significance": "downstream_impact_service_unresponsive"
+            },
+            {
+                "timestamp": "2024-03-15 14:11:02 UTC",
+                "event": "API Gateway circuit breaker opened for the pricing service.",
+                "causal_significance": "automated_system_protection"
+            },
+            {
+                "timestamp": "2024-03-15 14:11:10 UTC",
+                "event": "Trading halted platform-wide due to inability to serve price quotes.",
+                "causal_significance": "major_business_impact"
+            },
+            {
+                "timestamp": "2024-03-15 14:11:45 UTC",
+                "event": "PagerDuty alert triggered, on-call engineer notified.",
+                "causal_significance": "incident_detection_and_alerting"
+            },
+            {
+                "timestamp": "2024-03-15 14:16:30 UTC",
+                "event": "Engineer acknowledged the alert and began investigation.",
+                "causal_significance": "human_response_start"
+            },
+            {
+                "timestamp": "2024-03-15 14:22:08 UTC",
+                "event": "Long-running query (q_4489) on the 'user_positions' table in the primary database killed after 731 seconds.",
+                "causal_significance": "manual_remediation_action"
+            },
+            {
+                "timestamp": "2024-03-15 14:22:09 UTC",
+                "event": "Primary database connection pool began recovering, with 12 requests still waiting.",
+                "causal_significance": "system_recovery_sign"
+            },
+            {
+                "timestamp": "2024-03-15 14:23:15 UTC",
+                "event": "Pricing service query latency reported returning to normal.",
+                "causal_significance": "system_recovery_sign"
+            },
+            {
+                "timestamp": "2024-03-15 14:24:00 UTC",
+                "event": "API Gateway circuit breaker transitioned to HALF-OPEN state for pricing service.",
+                "causal_significance": "automated_recovery_step"
+            },
+            {
+                "timestamp": "2024-03-15 14:25:30 UTC",
+                "event": "API Gateway circuit breaker closed, indicating pricing service recovering.",
+                "causal_significance": "automated_recovery_step"
+            },
+            {
+                "timestamp": "2024-03-15 14:26:45 UTC",
+                "event": "Trading resumed on the platform.",
+                "causal_significance": "full_service_restoration"
+            },
+            {
+                "timestamp": "2024-03-15 14:45:00 UTC",
+                "event": "Post-incident analysis identified query q_4489 originated from the 'user_positions_recalc' batch job, scheduled daily at 14:00 UTC.",
+                "causal_significance": "post_incident_root_cause_analysis"
+            },
+            {
+                "timestamp": "2024-03-15 14:45:01 UTC",
+                "event": "Post-incident analysis determined the 'user_positions' table lacked an index on 'user_id' and 'position_date', causing q_4489 to trigger a full table scan.",
+                "causal_significance": "post_incident_underlying_root_cause_analysis"
+            }
+        ]
+    },
+    "incident_b": {
+        "incident_id": "INC-20240405-DB-EXHAUSTION",
+        "first_symptom": "2024-04-05 09:44:22 UTC",
+        "impact_moment": "2024-04-05 09:45:40 UTC",
+        "resolution_trigger": "2024-04-05 09:57:14 UTC",
+        "timeline": [
+            {
+                "timestamp": "2024-04-05 09:11:00 UTC",
+                "event": "API Gateway reports normal p99 request latency of 95ms (baseline).",
+                "causal_significance": "baseline"
+            },
+            {
+                "timestamp": "2024-04-05 09:44:22 UTC",
+                "event": "Order Service detects a slow database query (q_9031) with a duration of 1.8 seconds.",
+                "causal_significance": "first_symptom"
+            },
+            {
+                "timestamp": "2024-04-05 09:44:55 UTC",
+                "event": "Primary database connection pool becomes exhausted (100/100 connections in use) with 39 requests waiting.",
+                "causal_significance": "symptom"
+            },
+            {
+                "timestamp": "2024-04-05 09:45:10 UTC",
+                "event": "API Gateway reports upstream timeouts when calling the Order Service.",
+                "causal_significance": "symptom"
+            },
+            {
+                "timestamp": "2024-04-05 09:45:28 UTC",
+                "event": "API Gateway's circuit breaker opens for the Order Service due to persistent timeouts.",
+                "causal_significance": "symptom"
+            },
+            {
+                "timestamp": "2024-04-05 09:45:40 UTC",
+                "event": "Platform-wide critical alert: Order submission functionality is halted.",
+                "causal_significance": "impact_moment"
+            },
+            {
+                "timestamp": "2024-04-05 09:57:14 UTC",
+                "event": "Long-running database query q_9031 on 'open_orders' table is manually killed after running for 748 seconds.",
+                "causal_significance": "resolution_trigger"
+            },
+            {
+                "timestamp": "2024-04-05 09:57:15 UTC",
+                "event": "Primary database connection pool begins recovering.",
+                "causal_significance": "recovery"
+            },
+            {
+                "timestamp": "2024-04-05 09:59:00 UTC",
+                "event": "Order submission functionality is successfully resumed.",
+                "causal_significance": "recovery"
+            },
+            {
+                "timestamp": "2024-04-05 10:15:00 UTC",
+                "event": "Post-incident analysis reveals query q_9031 originated from the daily 'open_orders_settlement' batch job, scheduled at 09:30 UTC.",
+                "causal_significance": "root_cause_identification"
+            },
+            {
+                "timestamp": "2024-04-05 10:15:01 UTC",
+                "event": "Further investigation confirms the 'open_orders' table lacks a necessary index on 'account_id' and 'order_date', causing the query to perform a full table scan.",
+                "causal_significance": "root_cause"
+            }
+        ]
+    }
+}

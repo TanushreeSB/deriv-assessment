@@ -1,0 +1,121 @@
+[
+    {
+        "timestamp": "2024-03-15 14:02:11 UTC",
+        "level": "INFO",
+        "service": "api-gateway",
+        "message": "Request latency p99=120ms (baseline)"
+    },
+    {
+        "timestamp": "2024-03-15 14:08:44 UTC",
+        "level": "INFO",
+        "service": "api-gateway",
+        "message": "Request latency p99=340ms"
+    },
+    {
+        "timestamp": "2024-03-15 14:09:01 UTC",
+        "level": "WARN",
+        "service": "pricing-service",
+        "message": "Slow query detected query_id=q_4821 duration=2100ms",
+        "query_id": "q_4821",
+        "duration_ms": "2100"
+    },
+    {
+        "timestamp": "2024-03-15 14:09:15 UTC",
+        "level": "WARN",
+        "service": "pricing-service",
+        "message": "Slow query detected query_id=q_4822 duration=3400ms",
+        "query_id": "q_4822",
+        "duration_ms": "3400"
+    },
+    {
+        "timestamp": "2024-03-15 14:10:33 UTC",
+        "level": "ERROR",
+        "service": "db-primary",
+        "message": "Connection pool exhausted pool_size=100 waiting=47",
+        "pool_size": "100",
+        "waiting": "47"
+    },
+    {
+        "timestamp": "2024-03-15 14:10:45 UTC",
+        "level": "ERROR",
+        "service": "api-gateway",
+        "message": "Upstream timeout service=pricing-service timeout=5000ms"
+    },
+    {
+        "timestamp": "2024-03-15 14:11:02 UTC",
+        "level": "ERROR",
+        "service": "api-gateway",
+        "message": "Circuit breaker OPEN service=pricing-service"
+    },
+    {
+        "timestamp": "2024-03-15 14:11:10 UTC",
+        "level": "CRIT",
+        "service": "platform",
+        "message": "Trading halted \u00e2\u20ac\u201d unable to serve price quotes"
+    },
+    {
+        "timestamp": "2024-03-15 14:11:45 UTC",
+        "level": "INFO",
+        "service": "oncall",
+        "message": "PagerDuty alert triggered engineer notified"
+    },
+    {
+        "timestamp": "2024-03-15 14:16:30 UTC",
+        "level": "INFO",
+        "service": "oncall",
+        "message": "Engineer acknowledged investigating"
+    },
+    {
+        "timestamp": "2024-03-15 14:22:08 UTC",
+        "level": "INFO",
+        "service": "db-primary",
+        "message": "Long-running query killed query_id=q_4489 duration=731s table=user_positions",
+        "query_id": "q_4489",
+        "duration_seconds": "731",
+        "table": "user_positions"
+    },
+    {
+        "timestamp": "2024-03-15 14:22:09 UTC",
+        "level": "INFO",
+        "service": "db-primary",
+        "message": "Connection pool recovering waiting=12",
+        "waiting": "12"
+    },
+    {
+        "timestamp": "2024-03-15 14:23:15 UTC",
+        "level": "INFO",
+        "service": "pricing-service",
+        "message": "Query latency returning to normal"
+    },
+    {
+        "timestamp": "2024-03-15 14:24:00 UTC",
+        "level": "INFO",
+        "service": "api-gateway",
+        "message": "Circuit breaker HALF-OPEN"
+    },
+    {
+        "timestamp": "2024-03-15 14:25:30 UTC",
+        "level": "INFO",
+        "service": "api-gateway",
+        "message": "Circuit breaker CLOSED service recovering"
+    },
+    {
+        "timestamp": "2024-03-15 14:26:45 UTC",
+        "level": "INFO",
+        "service": "platform",
+        "message": "Trading resumed"
+    },
+    {
+        "timestamp": "2024-03-15 14:45:00 UTC",
+        "level": "INFO",
+        "service": "db-primary",
+        "message": "Post-incident analysis query q_4489 from batch job user_positions_recalc scheduled 14:00 UTC daily",
+        "job_name": "user_positions_recalc"
+    },
+    {
+        "timestamp": "2024-03-15 14:45:01 UTC",
+        "level": "INFO",
+        "service": "db-primary",
+        "message": "Table user_positions lacks index on user_id position_date \u00e2\u20ac\u201d full table scan triggered"
+    }
+]

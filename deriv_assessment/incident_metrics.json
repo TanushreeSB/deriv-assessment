@@ -1,0 +1,14 @@
+{
+    "incident_a": {
+        "first_warning": "2024-03-15 14:09:01 UTC",
+        "impact_moment": "2024-03-15 14:11:10 UTC",
+        "recovery_timestamp": "2024-03-15 14:26:45 UTC",
+        "mttr_minutes": 15
+    },
+    "incident_b": {
+        "first_warning": "2024-04-05 09:44:22 UTC",
+        "impact_moment": "2024-04-05 09:45:40 UTC",
+        "recovery_timestamp": "2024-04-05 09:59:00 UTC",
+        "mttr_minutes": 13
+    }
+}

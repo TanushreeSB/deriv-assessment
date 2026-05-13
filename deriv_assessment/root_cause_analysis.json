@@ -1,0 +1,34 @@
+{
+    "INC-20240315-001": {
+        "root_causes": [
+            "missing_index_batch_job"
+        ],
+        "same_failure_mode": true,
+        "structured_justification": {
+            "historical_incident_id": "INC-2024-007",
+            "similarities": [
+                "Both incidents were triggered by a batch job ('user_positions_recalc' in INC-20240315-001; 'batch job' in INC-2024-007) scheduled during operational hours (14:00 UTC, leading to impact at 14:11 UTC).",
+                "In both cases, a query from the batch job led to a full table scan due to a missing database index ('user_positions' table lacked index for q_4489 in INC-20240315-001; 'transactions table' lacked index in INC-2024-007).",
+                "This caused database connection pool exhaustion and subsequently led to upstream service timeouts and circuit breaker activation (API Gateway upstream timeout, circuit breaker opened for pricing service in INC-20240315-001).",
+                "The ultimate business impact was a halt in critical platform functionality (Trading halted in INC-20240315-001)."
+            ],
+            "key_difference": "While the underlying root cause and failure chain are identical, the specific service affected (Pricing service vs. general transactions) and the exact table/index details differ between the incidents."
+        }
+    },
+    "INC-20240405-DB-EXHAUSTION": {
+        "root_causes": [
+            "missing_index_batch_job"
+        ],
+        "same_failure_mode": true,
+        "structured_justification": {
+            "historical_incident_id": "INC-2024-007",
+            "similarities": [
+                "Both incidents were triggered by a batch job ('open_orders_settlement' in INC-20240405-DB-EXHAUSTION; 'batch job' in INC-2024-007) scheduled during operational hours (09:30 UTC, leading to impact at 09:45 UTC).",
+                "In both cases, a query from the batch job led to a full table scan due to a missing database index ('open_orders' table lacked index for q_9031 in INC-20240405-DB-EXHAUSTION; 'transactions table' lacked index in INC-2024-007).",
+                "This caused database connection pool exhaustion and subsequently led to upstream service timeouts and circuit breaker activation (API Gateway upstream timeouts, circuit breaker opened for Order Service in INC-20240405-DB-EXHAUSTION).",
+                "The ultimate business impact was a halt in critical platform functionality (Order submission functionality halted in INC-20240405-DB-EXHAUSTION)."
+            ],
+            "key_difference": "While the underlying root cause and failure chain are identical, the specific service affected (Order service vs. general transactions) and the exact table/index details differ between the incidents."
+        }
+    }
+}
